@@ -1,8 +1,8 @@
-# MusicChain (WIP)
+# 🎵 SongChain 🔗 (WIP) 
 
 [LangChain](https://python.langchain.com/docs/get_started/introduction.html) has garnered significant popularity as a means to string together models and their requisite data processing for generative language models. 
 
-MusicChain is doing this for ML models used for music including voice generation, audio and MIDI-based music generation and others. In particular, we aim to create a framework for music models that is as easy to use as LangChain is for language models.
+SongChain is doing this for ML models used for music including voice generation, audio and MIDI-based music generation and others. In particular, we aim to create a framework for music models that is as easy to use as LangChain is for language models.
 
 We want to enable the following use cases:
 * Simple Input / Output for musicians used to working with DAWs
@@ -17,7 +17,7 @@ Key Differences (WIP)
 
 ## Installation 
 ```bash
-pip install musicchain
+pip install songchain
 ```
 
 ### Dependencies (WIP)
@@ -32,9 +32,9 @@ pip install musicchain
 
 ## Token to Time Conversion
 
-MusicChain uses standard time conversion for manipulating audio files. This means that you can specify a time in seconds and the model will aim to use that for processing and training of models. 
+SongChain uses standard time conversion for manipulating audio files. This means that you can specify a time in seconds and the model will aim to use that for processing and training of models. 
 
-MusicChain automatically converts the token size inputs of a model (for inference or training time) to appropriate size audio segments. 
+SongChain automatically converts the token size inputs of a model (for inference or training time) to appropriate size audio segments. 
 
 Using ffmpeg, the tool automagically loads in your files, extracts the sampling rates and resamples based on the needs of the model specified for training or inference and then will tokenize it based on the window size of the model. 
 
@@ -50,4 +50,4 @@ AudioChain is designed to be modular and flexible. It is designed to be able to 
 
 ## Installation 
 
-We will specify the installation either via CPU or GPU. Many of the audio manipulation libraries use ffmpeg or other binaries which also need to be installed. To leverage the full power of MusicChain, we recommend using a GPU so you can run and fine-tune models faster. 
+We will specify the installation either via CPU or GPU. Many of the audio manipulation libraries use ffmpeg or other binaries which also need to be installed. To leverage the full power of SongChain, we recommend using a GPU so you can run and fine-tune models faster. 

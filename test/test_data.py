@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 import pretty_midi
-from audiochain.data import MIDIClip, AudioClip
+from audiochain.data import MIDIClip
 
 
 class TestMIDIClip:
