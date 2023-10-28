@@ -1,7 +1,12 @@
-torch==2.0.0
+numpy
+scipy
+torch>=2.0.0
 torchaudio
-audiocraft
+librosa
 pydub
 tqdm
 pretty_midi
 pypianoroll
+xformers
+audiocraft
+pytest

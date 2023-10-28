@@ -41,3 +41,10 @@ class MusicTransformer:  # Google Magenta
 
 class MuseNet:  # OpenAI
     pass
+
+
+# Audio to MIDI models
+
+
+class Pop2Piano:
+    pass

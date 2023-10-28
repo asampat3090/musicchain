@@ -51,3 +51,19 @@ AudioChain is designed to be modular and flexible. It is designed to be able to 
 ## Installation 
 
 We will specify the installation either via CPU or GPU. Many of the audio manipulation libraries use ffmpeg or other binaries which also need to be installed. To leverage the full power of SongChain, we recommend using a GPU so you can run and fine-tune models faster. 
+
+1. install brew for arm64 (apple silicon architecture)
+
+4. install openmp library
+	1. brew install libomp
+	2. export PATH="/opt/homebrew/opt/libomp/bin:$PATH"
+	5. export LDFLAGS/CPPFLAGS
+
+3. install llvm library
+	1. brew install llvm
+	2. export PATH="/opt/homebrew/opt/libomp/bin:$PATH
+	3. export LDFLAGS/CPPFLAGS - including those for C++!!
+
+```bash
+> pip install -e songchain
+```

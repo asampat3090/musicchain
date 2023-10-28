@@ -1,9 +1,11 @@
 import librosa
 import numpy as np
 import torch
+import random
 import torchaudio
 import pretty_midi
 import pypianoroll
+from audiocraft.models import MusicGen
 
 
 class MIDIClip:
@@ -266,3 +268,32 @@ class AudioClip:
     @property
     def mel_spectrogram(self) -> torch.Tensor:
         pass
+
+    # TODO: Major speed up needed - on CPU takes 2 min on first model load
+    @property
+    def encodec(self) -> torch.Tensor:
+        model = MusicGen.get_pretrained("small", device="cpu")
+        wav_tensor = torchaudio.functional.resample(
+            self.tensor, self.sample_rate, model.sample_rate
+        )
+        wav_tensor = wav_tensor.mean(dim=0, keepdim=True)
+
+        if wav_tensor.shape[1] < model.sample_rate * self.duration:
+            return None
+        end_sample = int(model.sample_rate * self.duration)
+        start_sample = random.randrange(0, max(wav_tensor.shape[1] - end_sample, 1))
+        wav_tensor = wav_tensor[:, start_sample : start_sample + end_sample]
+
+        assert wav_tensor.shape[0] == 1
+
+        # wav_tensor = wav_tensor.cuda()
+        wav_tensor = wav_tensor.unsqueeze(1)
+
+        with torch.no_grad():
+            gen_audio = model.compression_model.encode(wav_tensor)
+
+        codes, scale = gen_audio
+
+        assert scale is None
+
+        return codes

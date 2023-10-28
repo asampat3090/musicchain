@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 import pretty_midi
-from audiochain.data import MIDIClip
+from songchain.data import MIDIClip, AudioClip
 
 
 class TestMIDIClip:
@@ -54,3 +54,27 @@ class TestMIDIClip:
 
 # def test_lower(self):
 #   assert self.text.lower() == "hello world"
+
+
+class TestAudioClip:
+    def setup_method(self):
+        self.audio_obj = AudioClip("002_001.wav")
+
+    def test_setup(self):
+        assert self.audio_obj.filepath == "002_001.wav"
+        assert torch.is_tensor(self.audio_obj.tensor)
+        assert isinstance(self.audio_obj.sample_rate, int)
+        assert self.audio_obj.duration == 30.0
+
+    def test_waveform(self):
+        assert torch.is_tensor(self.audio_obj.waveform)
+        assert self.audio_obj.sample_rate == 44100
+        assert self.audio_obj.mono == False  # stereo
+        assert self.audio_obj.waveform.shape == (2, 1323000)  # 30 * 44100
+
+    def test_spectrogram(self):
+        assert torch.is_tensor(self.audio_obj.spectrogram)
+        assert self.audio_obj.spectrogram.shape == (2, 1025, 2584)
+
+    def test_encodec(self):
+        assert self.audio_obj.encodec.shape == (1, 4, 1500)  # 30 * 44100 / 882?
